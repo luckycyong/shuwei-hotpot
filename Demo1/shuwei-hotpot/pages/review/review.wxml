@@ -1,0 +1,43 @@
+ <view class="page-review">
+        <view class="review-header">
+        <text class="review-title">⭐ 评价订单</text>
+        <text class="review-order-id">{{orderId}}</text>
+        </view>
+
+        <view class="review-card" wx:if="{{order}}">
+        <text class="section-label">订单菜品</text>
+        <view class="order-items">
+        <text class="oi-tag" wx:for="{{order.items}}" wx:for-item="it" wx:key="id">
+        {{it.name}} ×{{it.quantity}}
+        </text>
+        </view>
+        <text class="order-total-text">合计: ¥{{order.totalPriceStr}}</text>
+        </view>
+
+        <!-- 星级评分 -->
+        <view class="rating-section">
+        <text class="section-label">您的评分</text>
+        <view class="stars-row">
+        <text class="star {{index < rating ? 'active' : ''}}"
+        wx:for="{{stars}}" wx:key="*this"
+        data-rating="{{item}}" bindtap="setRating">
+        {{index < rating ? '⭐' : '☆'}}
+        </text>
+        </view>
+        <text class="rating-hint" wx:if="{{rating === 0}}">点击星星评分</text>
+        <text class="rating-hint rated" wx:else>
+        {{rating === 1 ? '很差' : rating === 2 ? '一般' : rating === 3 ? '不错' : rating === 4 ? '满意' : '超赞！'}}
+        </text>
+        </view>
+
+        <!-- 文字评价 -->
+        <view class="comment-section">
+        <text class="section-label">文字评价（选填）</text>
+        <textarea class="comment-input" placeholder="分享您的用餐体验..." value="{{comment}}"
+        bindinput="onCommentInput" maxlength="200" />
+        <text class="char-count">{{comment.length}}/200</text>
+        </view>
+
+        <!-- 提交按钮 -->
+        <button class="submit-btn" bindtap="submitReview">提交评价 ✅</button>
+        </view>

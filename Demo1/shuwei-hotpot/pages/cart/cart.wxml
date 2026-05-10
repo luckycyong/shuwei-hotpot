@@ -1,0 +1,50 @@
+<view class="page-cart">
+        <view class="cart-header">
+        <text class="cart-title">🛒 购物车</text>
+        <text class="table-info">桌号: {{tableNo}}</text>
+        </view>
+
+        <!-- 空购物车 -->
+        <view class="empty-cart" wx:if="{{isEmpty}}">
+        <text class="empty-icon">🛒</text>
+        <text class="empty-text">购物车空空如也</text>
+        <text class="empty-sub">快去菜单页挑选美味火锅食材吧~</text>
+        <navigator url="/pages/index/index" open-type="switchTab" class="go-menu-btn">
+        去点餐 →
+        </navigator>
+        </view>
+
+        <!-- 购物车列表 -->
+        <view class="cart-list" wx:if="{{!isEmpty}}">
+        <view class="cart-item" wx:for="{{cartItems}}" wx:key="id">
+        <view class="item-image">{{item.image}}</view>
+        <view class="item-info">
+        <text class="item-name">{{item.name}}</text>
+        <text class="item-price">¥{{item.price}}/{{item.unit}}</text>
+        </view>
+        <view class="item-actions">
+        <view class="qty-control">
+        <text class="qty-btn" data-id="{{item.id}}" bindtap="decrease">-</text>
+        <text class="qty-num">{{item.quantity}}</text>
+        <text class="qty-btn" data-id="{{item.id}}" bindtap="increase">+</text>
+        </view>
+        <text class="item-subtotal">¥{{item.subtotal}}</text>
+        </view>
+        <view class="item-remove" data-id="{{item.id}}" bindtap="removeItem">🗑</view>
+        </view>
+        </view>
+
+        <!-- 底部结算栏 -->
+        <view class="bottom-bar" wx:if="{{!isEmpty}}">
+        <view class="bottom-left">
+        <text class="clear-btn" bindtap="clearCart">🧹 清空</text>
+        </view>
+        <view class="bottom-center">
+        <text>共 <text class="count-highlight">{{totalCount}}</text> 件</text>
+        </view>
+        <view class="bottom-right">
+        <text class="total-price">合计: ¥{{totalPrice}}</text>
+        <button class="checkout-btn" bindtap="checkout">确认下单</button>
+        </view>
+        </view>
+        </view>

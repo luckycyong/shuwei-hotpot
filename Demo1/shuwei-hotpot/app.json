@@ -1,0 +1,49 @@
+{
+  "pages": [
+  "pages/index/index",
+  "pages/cart/cart",
+  "pages/order/order",
+  "pages/review/review",
+  "pages/mine/mine"
+  ],
+  "window": {
+  "navigationBarBackgroundColor": "#b8320a",
+  "navigationBarTitleText": "蜀味火锅",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#fdf6f0"
+  },
+  "tabBar": {
+  "color": "#8b6f5e",
+  "selectedColor": "#d4380d",
+  "backgroundColor": "#fff",
+  "borderStyle": "white",
+  "list": [
+  {
+  "pagePath": "pages/index/index",
+  "text": "菜单",
+  "iconPath": "icons/menu.png",
+  "selectedIconPath": "icons/menu.png"
+  },
+  {
+  "pagePath": "pages/cart/cart",
+  "text": "购物车",
+  "iconPath": "icons/cart.png",
+  "selectedIconPath": "icons/cart.png"
+  },
+  {
+  "pagePath": "pages/order/order",
+  "text": "订单",
+  "iconPath": "icons/order.png",
+  "selectedIconPath": "icons/order.png"
+  },
+  {
+  "pagePath": "pages/mine/mine",
+  "text": "我的",
+  "iconPath": "icons/mine.png",
+  "selectedIconPath": "icons/mine.png"
+  }
+  ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+  }

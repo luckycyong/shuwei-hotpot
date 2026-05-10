@@ -1,0 +1,85 @@
+page {
+        --primary: #d4380d;
+        --primary-light: #ff6b3a;
+        --bg: #fdf6f0;
+        --card-bg: #ffffff;
+        --text: #2c1810;
+        --text-secondary: #7a5c4f;
+        --text-light: #b8a090;
+        --border: #f0e0d6;
+        --gold: #e8a850;
+        --success: #52c41a;
+        --danger: #e74c3c;
+        --shadow: 0 2px 12px rgba(180, 80, 40, 0.08);
+        --radius: 16px;
+        --radius-sm: 10px;
+
+        background-color: var(--bg);
+        font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        color: var(--text);
+        font-size: 28rpx;
+        line-height: 1.6;
+        }
+
+        /* 安全区域 */
+        .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+        /* 通用按钮 */
+        .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20rpx 48rpx;
+        background: linear-gradient(135deg, #d4380d, #c02d08);
+        color: #fff;
+        border-radius: 50rpx;
+        font-weight: 700;
+        font-size: 30rpx;
+        letter-spacing: 2rpx;
+        border: none;
+        box-shadow: 0 4rpx 16rpx rgba(212, 56, 13, 0.35);
+        transition: all 0.2s;
+        }
+        .btn-primary:active { transform: scale(0.96); opacity: 0.9; }
+
+        .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18rpx 40rpx;
+        background: transparent;
+        color: var(--primary);
+        border: 2rpx solid var(--primary);
+        border-radius: 50rpx;
+        font-weight: 600;
+        font-size: 28rpx;
+        }
+
+        /* 卡片 */
+        .card {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 24rpx;
+        margin: 16rpx 20rpx;
+        box-shadow: var(--shadow);
+        }
+
+        /* 标签 */
+        .tag {
+        display: inline-block;
+        padding: 4rpx 16rpx;
+        border-radius: 20rpx;
+        font-size: 22rpx;
+        font-weight: 600;
+        }
+        .tag-spicy { background: #fff0ed; color: #d4380d; }
+        .tag-hot { background: #fff7e6; color: #e8a850; }
+        .tag-new { background: #e6f7ff; color: #1890ff; }
+
+        /* 价格 */
+        .price {
+        color: var(--primary);
+        font-weight: 800;
+        }
+        .price-unit { font-size: 22rpx; }
+        .price-num { font-size: 36rpx; }

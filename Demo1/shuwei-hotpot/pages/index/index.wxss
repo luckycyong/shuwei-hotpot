@@ -1,0 +1,104 @@
+.page-index { display: flex; flex-direction: column; height: 100vh; background: var(--bg); }
+
+        .top-bar {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 20rpx 28rpx; background: linear-gradient(180deg, #d4380d, #b8320a);
+        color: #fff;
+        }
+        .shop-name { font-size: 34rpx; font-weight: 800; letter-spacing: 2rpx; }
+        .table-badge {
+        font-size: 24rpx; background: rgba(255,255,255,0.2); padding: 6rpx 20rpx;
+        border-radius: 30rpx; margin-left: 12rpx;
+        }
+        .cart-entry { position: relative; padding: 8rpx; }
+        .cart-icon { font-size: 44rpx; }
+        .cart-count {
+        position: absolute; top: -4rpx; right: -8rpx;
+        background: #ff0; color: #c00; font-size: 20rpx; font-weight: 800;
+        width: 36rpx; height: 36rpx; border-radius: 50%; text-align: center; line-height: 36rpx;
+        }
+
+        .search-bar { padding: 16rpx 24rpx; }
+        .search-input {
+        width: 100%; height: 72rpx; background: #fff; border-radius: 40rpx;
+        padding: 0 32rpx; font-size: 28rpx; box-shadow: var(--shadow);
+        }
+
+        .category-scroll {
+        white-space: nowrap; padding: 0 20rpx 16rpx;
+        }
+        .cat-item {
+        display: inline-block; padding: 14rpx 28rpx; margin: 0 8rpx;
+        background: #fff; border-radius: 30rpx; font-size: 26rpx; font-weight: 600;
+        color: var(--text-secondary); box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+        transition: all 0.2s;
+        }
+        .cat-item.active { background: var(--primary); color: #fff; }
+
+        .menu-scroll { flex: 1; }
+        .menu-grid { display: flex; flex-wrap: wrap; padding: 0 16rpx; }
+        .menu-card {
+        width: calc(50% - 24rpx); margin: 10rpx 12rpx;
+        background: #fff; border-radius: var(--radius); overflow: hidden;
+        box-shadow: var(--shadow); transition: all 0.2s;
+        }
+        .menu-card:active { transform: scale(0.97); }
+        .card-image {
+        font-size: 80rpx; text-align: center; padding: 20rpx 0 8rpx;
+        background: linear-gradient(180deg, #fff8f4, #fff);
+        }
+        .card-info { padding: 12rpx 18rpx 18rpx; }
+        .card-name { font-size: 28rpx; font-weight: 700; margin-bottom: 4rpx; }
+        .spicy-icon { font-size: 22rpx; margin-left: 4rpx; }
+        .card-desc { font-size: 22rpx; color: var(--text-light); margin-bottom: 10rpx;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .card-bottom { display: flex; justify-content: space-between; align-items: center; }
+            .card-price .unit { font-size: 22rpx; color: var(--primary); }
+            .card-price .num { font-size: 34rpx; font-weight: 800; color: var(--primary); }
+            .card-price .per { font-size: 20rpx; color: var(--text-light); }
+            .add-btn {
+            width: 52rpx; height: 52rpx; background: var(--primary); color: #fff;
+            border-radius: 50%; text-align: center; line-height: 52rpx; font-size: 32rpx;
+            font-weight: 700;
+            }
+            .card-tags { margin-top: 8rpx; }
+            .card-tags .tag {
+            display: inline-block; padding: 2rpx 12rpx; background: #fff0ed;
+            color: #d4380d; font-size: 20rpx; border-radius: 16rpx; margin-right: 6rpx;
+            }
+
+            .empty-tip { text-align: center; padding: 80rpx 0; color: var(--text-light); font-size: 30rpx; }
+
+            .cart-float {
+            position: fixed; bottom: 100rpx; left: 24rpx; right: 24rpx;
+            background: #2c1810; color: #fff; border-radius: 50rpx;
+            padding: 24rpx 32rpx; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 0 8rpx 30rpx rgba(0,0,0,0.3); z-index: 100;
+            }
+            .cart-float-icon { font-size: 40rpx; margin-right: 12rpx; }
+            .cart-float-count { font-size: 28rpx; font-weight: 600; }
+            .cart-float-right { font-size: 28rpx; color: #e8a850; font-weight: 700; }
+
+            /* 弹窗 */
+            .modal-mask {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6); display: flex; align-items: center;
+            justify-content: center; z-index: 999;
+            }
+            .modal-box {
+            width: 560rpx; background: #fff; border-radius: var(--radius);
+            padding: 40rpx 32rpx; text-align: center;
+            }
+            .modal-title { font-size: 32rpx; font-weight: 700; display: block; margin-bottom: 24rpx; }
+            .modal-input {
+            width: 100%; height: 80rpx; border: 2rpx solid var(--border);
+            border-radius: var(--radius-sm); padding: 0 24rpx; font-size: 30rpx;
+            text-align: center; margin-bottom: 24rpx;
+            }
+            .modal-btns { display: flex; gap: 16rpx; }
+            .btn-cancel, .btn-confirm {
+            flex: 1; height: 76rpx; border-radius: 40rpx; font-size: 28rpx;
+            font-weight: 600; border: none;
+            }
+            .btn-cancel { background: #f5f5f5; color: #666; }
+            .btn-confirm { background: var(--primary); color: #fff; }

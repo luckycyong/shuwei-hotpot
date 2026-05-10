@@ -1,0 +1,46 @@
+<view class="page-mine">
+        <!-- 头部 -->
+        <view class="mine-header">
+        <view class="avatar">🍲</view>
+        <text class="shop-name">蜀味火锅</text>
+        <text class="shop-slogan">地道成都味，麻辣鲜香</text>
+        </view>
+
+        <!-- 数据统计 -->
+        <view class="stats-row">
+        <view class="stat-item">
+        <text class="stat-num">{{totalOrders}}</text>
+        <text class="stat-label">总订单</text>
+        </view>
+        <view class="stat-item">
+        <text class="stat-num">{{reviewedCount}}</text>
+        <text class="stat-label">已评价</text>
+        </view>
+        <view class="stat-item">
+        <text class="stat-num">{{tableNo}}</text>
+        <text class="stat-label">当前桌号</text>
+        </view>
+        </view>
+
+        <!-- 功能列表 -->
+        <view class="func-list">
+        <view class="func-item" bindtap="changeTable">
+        <text>🪑 切换桌号</text>
+        <text class="func-arrow">›</text>
+        </view>
+        <navigator url="/pages/order/order" open-type="switchTab" class="func-item">
+        <text>📋 查看订单</text>
+        <text class="func-arrow">›</text>
+        </navigator>
+        <view class="func-item" bindtap="contactShop">
+        <text>📞 联系门店</text>
+        <text class="func-arrow">›</text>
+        </view>
+        <view class="func-item" bindtap="clearAllData">
+        <text style="color:#e74c3c;">🗑 清除数据</text>
+        <text class="func-arrow" style="color:#e74c3c;">›</text>
+        </view>
+        </view>
+
+        <view class="footer-text">蜀味火锅 v1.0 · 自助点餐系统</view>
+        </view>

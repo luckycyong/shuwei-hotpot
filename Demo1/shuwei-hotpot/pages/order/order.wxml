@@ -1,0 +1,52 @@
+<view class="page-order">
+        <view class="order-header">
+        <text class="order-title">📋 我的订单</text>
+        </view>
+
+        <!-- 状态筛选 -->
+        <view class="tab-row">
+        <text class="tab-item {{activeTab === 'all' ? 'active' : ''}}" data-tab="all" bindtap="switchTab">全部</text>
+        <text class="tab-item {{activeTab === 'paid' ? 'active' : ''}}" data-tab="paid" bindtap="switchTab">制作中</text>
+        <text class="tab-item {{activeTab === 'completed' ? 'active' : ''}}" data-tab="completed" bindtap="switchTab">待评价</text>
+        <text class="tab-item {{activeTab === 'reviewed' ? 'active' : ''}}" data-tab="reviewed" bindtap="switchTab">已评价</text>
+        </view>
+
+        <!-- 空状态 -->
+        <view class="empty-state" wx:if="{{filteredOrders.length === 0}}">
+        <text class="empty-icon">📭</text>
+        <text class="empty-text">暂无订单</text>
+        </view>
+
+        <!-- 订单列表 -->
+        <scroll-view class="order-list" scroll-y wx:if="{{filteredOrders.length > 0}}">
+        <view class="order-card" wx:for="{{filteredOrders}}" wx:key="id"
+        data-order="{{item}}" bindtap="showDetail">
+        <view class="order-top">
+        <text class="order-id">{{item.id}}</text>
+        <text class="order-status status-{{item.status}}">
+        {{item.status === 'paid' ? '制作中' : item.status === 'completed' ? '待评价' : '已评价'}}
+        </text>
+        </view>
+        <view class="order-info">
+        <text>🪑 桌号: {{item.tableNo}}</text>
+        <text>🕐 {{item.createTime}}</text>
+        </view>
+        <view class="order-items-preview">
+        <text wx:for="{{item.items}}" wx:for-item="it" wx:key="id" class="preview-tag">
+        {{it.name}}×{{it.quantity}}
+        </text>
+        </view>
+        <view class="order-bottom">
+        <text class="price-num">¥{{item.totalPriceStr}}</text>
+        <view class="order-actions">
+        <button class="action-btn complete-btn" wx:if="{{item.status === 'paid'}}"
+        data-id="{{item.id}}" bindtap="completeOrder">确认完成</button>
+        <button class="action-btn review-btn" wx:if="{{item.status === 'completed'}}"
+        data-id="{{item.id}}" bindtap="goReview">去评价 ⭐</button>
+        <text class="reviewed-tag" wx:if="{{item.status === 'reviewed'}}">✅ 已评价</text>
+        </view>
+        </view>
+        </view>
+        <view style="height: 40rpx;"></view>
+        </scroll-view>
+        </view>
