@@ -1,50 +1,77 @@
 <view class="page-cart">
-        <view class="cart-header">
-        <text class="cart-title">🛒 购物车</text>
-        <text class="table-info">桌号: {{tableNo}}</text>
-        </view>
 
-        <!-- 空购物车 -->
-        <view class="empty-cart" wx:if="{{isEmpty}}">
-        <text class="empty-icon">🛒</text>
-        <text class="empty-text">购物车空空如也</text>
-        <text class="empty-sub">快去菜单页挑选美味火锅食材吧~</text>
-        <navigator url="/pages/index/index" open-type="switchTab" class="go-menu-btn">
-        去点餐 →
-        </navigator>
-        </view>
+  <!-- 头部 -->
+  <view class="cart-header">
+    <view class="cart-header-left">
+      <text class="cart-title">🛒 购物车</text>
+      <text class="table-info">🪑 {{tableNo}}</text>
+    </view>
+    <view class="cart-header-right">
+      <text class="wechat-badge">微信支付</text>
+    </view>
+  </view>
 
-        <!-- 购物车列表 -->
-        <view class="cart-list" wx:if="{{!isEmpty}}">
-        <view class="cart-item" wx:for="{{cartItems}}" wx:key="id">
+  <!-- 空购物车 -->
+  <view class="empty-cart" wx:if="{{isEmpty}}">
+    <text class="empty-icon">🛒</text>
+    <text class="empty-text">购物车空空如也</text>
+    <text class="empty-sub">快去菜单页挑选美味火锅食材吧~</text>
+    <navigator url="/pages/index/index" open-type="switchTab" class="go-menu-btn">
+      去点餐 →
+    </navigator>
+  </view>
+
+  <!-- 购物车列表 -->
+  <scroll-view class="cart-scroll" scroll-y wx:if="{{!isEmpty}}">
+    <view class="cart-list">
+      <view class="cart-item" wx:for="{{cartItems}}" wx:key="id">
         <view class="item-image">{{item.image}}</view>
         <view class="item-info">
-        <text class="item-name">{{item.name}}</text>
-        <text class="item-price">¥{{item.price}}/{{item.unit}}</text>
+          <text class="item-name">{{item.name}}</text>
+          <text class="item-price">¥{{item.price}}/{{item.unit}}</text>
         </view>
         <view class="item-actions">
-        <view class="qty-control">
-        <text class="qty-btn" data-id="{{item.id}}" bindtap="decrease">-</text>
-        <text class="qty-num">{{item.quantity}}</text>
-        <text class="qty-btn" data-id="{{item.id}}" bindtap="increase">+</text>
-        </view>
-        <text class="item-subtotal">¥{{item.subtotal}}</text>
+          <view class="qty-control">
+            <text class="qty-btn" data-id="{{item.id}}" bindtap="decrease">−</text>
+            <text class="qty-num">{{item.quantity}}</text>
+            <text class="qty-btn" data-id="{{item.id}}" bindtap="increase">+</text>
+          </view>
+          <text class="item-subtotal">¥{{item.subtotal}}</text>
         </view>
         <view class="item-remove" data-id="{{item.id}}" bindtap="removeItem">🗑</view>
-        </view>
-        </view>
+      </view>
+    </view>
 
-        <!-- 底部结算栏 -->
-        <view class="bottom-bar" wx:if="{{!isEmpty}}">
-        <view class="bottom-left">
-        <text class="clear-btn" bindtap="clearCart">🧹 清空</text>
-        </view>
-        <view class="bottom-center">
-        <text>共 <text class="count-highlight">{{totalCount}}</text> 件</text>
-        </view>
-        <view class="bottom-right">
-        <text class="total-price">合计: ¥{{totalPrice}}</text>
-        <button class="checkout-btn" bindtap="checkout">确认下单</button>
-        </view>
-        </view>
-        </view>
+    <!-- 温馨提示 -->
+    <view class="cart-tips">
+      <text class="tip-item">✅ 已接入微信安全支付</text>
+      <text class="tip-item">🔒 支付信息全程加密</text>
+    </view>
+
+    <view style="height: 180rpx;"></view>
+  </scroll-view>
+
+  <!-- 底部结算栏（微信支付版） -->
+  <view class="bottom-bar" wx:if="{{!isEmpty}}">
+    <view class="bottom-left">
+      <text class="clear-btn" bindtap="clearCart">🧹 清空</text>
+    </view>
+    <view class="bottom-center">
+      <text class="summary-text">共 <text class="count-highlight">{{totalCount}}</text> 件</text>
+      <text class="total-price-label">合计</text>
+      <text class="total-price-num">¥{{totalPrice}}</text>
+    </view>
+    <view class="bottom-right">
+      <button class="checkout-btn {{isPaying ? 'paying' : ''}}"
+        disabled="{{isPaying}}" bindtap="checkout">
+        <text wx:if="{{isPaying}}" class="btn-loading">支付中...</text>
+        <text wx:else>
+          <text class="btn-icon">💳</text>
+          <text class="btn-text">微信支付</text>
+        </text>
+      </button>
+      <text class="pay-hint" wx:if="{{!isPaying}}">微信安全支付</text>
+    </view>
+  </view>
+
+</view>

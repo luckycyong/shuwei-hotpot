@@ -1,45 +1,141 @@
-.page-order { display: flex; flex-direction: column; height: 100vh; background: var(--bg); }
-        .order-header { padding: 24rpx 28rpx; background: #fff; border-bottom: 1rpx solid var(--border); }
-        .order-title { font-size: 36rpx; font-weight: 800; }
+.page-order {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg);
+}
+.order-header {
+  padding: 24rpx 28rpx;
+  background: #fff;
+  border-bottom: 1rpx solid var(--border);
+}
+.order-title {
+  font-size: 36rpx;
+  font-weight: 800;
+}
 
-        .tab-row {
-        display: flex; padding: 16rpx 20rpx; background: #fff; gap: 8rpx;
-        }
-        .tab-item {
-        flex: 1; text-align: center; padding: 14rpx 0; font-size: 26rpx;
-        border-radius: 30rpx; background: #f8f8f8; color: #888; font-weight: 600;
-        }
-        .tab-item.active { background: var(--primary); color: #fff; }
+.tab-row {
+  display: flex;
+  padding: 16rpx 20rpx;
+  background: #fff;
+  gap: 8rpx;
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 14rpx 0;
+  font-size: 26rpx;
+  border-radius: 30rpx;
+  background: #f8f8f8;
+  color: #888;
+  font-weight: 600;
+}
+.tab-item.active {
+  background: var(--primary);
+  color: #fff;
+}
 
-        .empty-state { flex: 1; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; }
-            .empty-icon { font-size: 100rpx; }
-            .empty-text { font-size: 28rpx; color: var(--text-light); margin-top: 16rpx; }
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.empty-icon { font-size: 100rpx; }
+.empty-text { font-size: 28rpx; color: var(--text-light); margin-top: 16rpx; }
 
-            .order-list { flex: 1; padding: 16rpx 20rpx; }
-            .order-card {
-            background: #fff; border-radius: var(--radius); padding: 24rpx;
-            margin-bottom: 16rpx; box-shadow: var(--shadow);
-            }
-            .order-top { display: flex; justify-content: space-between; margin-bottom: 10rpx; }
-            .order-id { font-weight: 700; font-size: 28rpx; }
-            .order-status { font-size: 24rpx; padding: 4rpx 16rpx; border-radius: 20rpx; font-weight: 600; }
-            .status-paid { background: #fff7e6; color: #e8a850; }
-            .status-completed { background: #e6f7ff; color: #1890ff; }
-            .status-reviewed { background: #f6ffed; color: #52c41a; }
-            .order-info { display: flex; gap: 20rpx; font-size: 24rpx; color: var(--text-light); margin-bottom: 10rpx; }
-            .order-items-preview { display: flex; flex-wrap: wrap; gap: 8rpx; margin-bottom: 14rpx; }
-            .preview-tag {
-            font-size: 22rpx; background: #fdf6f0; padding: 4rpx 14rpx;
-            border-radius: 16rpx; color: var(--text-secondary);
-            }
-            .order-bottom { display: flex; justify-content: space-between; align-items: center; }
-            .order-total { font-size: 28rpx; font-weight: 600; }
-            .price-num { color: var(--primary); font-size: 34rpx; font-weight: 800; }
-            .action-btn {
-            padding: 12rpx 28rpx; border-radius: 30rpx; font-size: 24rpx;
-            font-weight: 600; border: none;
-            }
-            .complete-btn { background: #f0f0f0; color: #555; }
-            .review-btn { background: #fff7e6; color: #e8a850; border: 1rpx solid #e8a850; }
-            .reviewed-tag { font-size: 24rpx; color: #52c41a; font-weight: 600; }
+.order-list { flex: 1; padding: 16rpx 20rpx; }
+.order-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: var(--shadow);
+}
+.order-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+.order-id { font-weight: 700; font-size: 28rpx; }
+.order-status-right {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.pay-method-tag {
+  font-size: 20rpx;
+  color: #07c160;
+  background: #e8f8ee;
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+  font-weight: 600;
+}
+.order-status {
+  font-size: 24rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-weight: 600;
+}
+.status-paid { background: #fff7e6; color: #e8a850; }
+.status-completed { background: #e6f7ff; color: #1890ff; }
+.status-reviewed { background: #f6ffed; color: #52c41a; }
+.order-info {
+  display: flex;
+  gap: 20rpx;
+  font-size: 24rpx;
+  color: var(--text-light);
+  margin-bottom: 10rpx;
+}
+.order-items-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin-bottom: 14rpx;
+}
+.preview-tag {
+  font-size: 22rpx;
+  background: #fdf6f0;
+  padding: 4rpx 14rpx;
+  border-radius: 16rpx;
+  color: var(--text-secondary);
+}
+.order-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.price-num {
+  color: var(--primary);
+  font-size: 34rpx;
+  font-weight: 800;
+}
+.action-btn {
+  padding: 12rpx 28rpx;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  border: none;
+}
+.complete-btn { background: #f0f0f0; color: #555; }
+.review-btn { background: #fff7e6; color: #e8a850; border: 1rpx solid #e8a850; }
+.edit-review-btn { background: #e6f7ff; color: #1890ff; border: 1rpx solid #1890ff; }
+.reviewed-tag { font-size: 24rpx; color: #52c41a; font-weight: 600; }
+
+/* 评价预览 */
+.order-review-preview {
+  background: #fdf6f0;
+  border-radius: var(--radius-sm);
+  padding: 12rpx 16rpx;
+  margin-bottom: 12rpx;
+}
+.review-preview-text {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}

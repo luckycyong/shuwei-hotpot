@@ -1,27 +1,89 @@
 .page-mine { min-height: 100vh; background: var(--bg); }
-        .mine-header {
-        text-align: center; padding: 50rpx 0 30rpx;
-        background: linear-gradient(180deg, #d4380d, #b8320a); color: #fff;
-        }
-        .avatar { font-size: 80rpx; margin-bottom: 12rpx; }
-        .shop-name { font-size: 38rpx; font-weight: 800; display: block; }
-        .shop-slogan { font-size: 24rpx; opacity: 0.85; }
+.mine-header {
+  text-align: center; padding: 50rpx 0 30rpx;
+  background: linear-gradient(180deg, #d4380d, #b8320a); color: #fff;
+}
+.avatar { font-size: 80rpx; margin-bottom: 12rpx; }
+.shop-name { font-size: 38rpx; font-weight: 800; display: block; }
+.shop-slogan { font-size: 24rpx; opacity: 0.85; }
 
-        .stats-row {
-        display: flex; margin: -30rpx 24rpx 20rpx; background: #fff;
-        border-radius: var(--radius); padding: 30rpx 0; box-shadow: var(--shadow);
-        }
-        .stat-item { flex: 1; text-align: center; }
-        .stat-num { font-size: 40rpx; font-weight: 800; color: var(--primary); display: block; }
-        .stat-label { font-size: 24rpx; color: var(--text-light); }
+.stats-row {
+  display: flex; margin: -30rpx 24rpx 20rpx; background: #fff;
+  border-radius: var(--radius); padding: 30rpx 0; box-shadow: var(--shadow);
+}
+.stat-item { flex: 1; text-align: center; }
+.stat-num { font-size: 40rpx; font-weight: 800; color: var(--primary); display: block; }
+.stat-num.guest { color: #999; font-size: 28rpx; }
+.stat-label { font-size: 24rpx; color: var(--text-light); }
 
-        .func-list { margin: 0 24rpx; background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
-        .func-item {
-        display: flex; justify-content: space-between; align-items: center;
-        padding: 32rpx 24rpx; font-size: 30rpx; font-weight: 600;
-        border-bottom: 1rpx solid #f5f5f5;
-        }
-        .func-item:last-child { border-bottom: none; }
-        .func-arrow { font-size: 36rpx; color: #ccc; }
+.func-list { margin: 0 24rpx; background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.func-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 32rpx 24rpx; font-size: 30rpx; font-weight: 600;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.func-item:last-child { border-bottom: none; }
+.func-arrow { font-size: 36rpx; color: #ccc; }
 
-        .footer-text { text-align: center; padding: 40rpx; color: var(--text-light); font-size: 24rpx; }
+/* 高亮的"顾客评价"入口 */
+.func-item-highlight {
+  background: linear-gradient(135deg, #fff8f4, #fff);
+  border-bottom: 2rpx solid var(--border);
+}
+.func-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.func-icon { font-size: 32rpx; }
+.func-text { font-size: 30rpx; font-weight: 700; color: var(--text); }
+.func-item-right {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.func-badge {
+  font-size: 22rpx;
+  color: #fff;
+  background: var(--primary);
+  padding: 4rpx 16rpx;
+  border-radius: 30rpx;
+  font-weight: 700;
+  min-width: 40rpx;
+  text-align: center;
+}
+
+/* 游客提示 */
+.guest-tip {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin: 20rpx 24rpx 0;
+  padding: 20rpx 24rpx;
+  background: #fffbe6;
+  border-radius: var(--radius-sm);
+  border: 1rpx solid #f0e0b0;
+}
+.guest-tip-icon { font-size: 28rpx; }
+.guest-tip-text {
+  font-size: 24rpx;
+  color: #8b7a40;
+  flex: 1;
+}
+
+/* 管理员入口 */
+.admin-entry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  margin: 20rpx 24rpx 0;
+  padding: 20rpx;
+  background: #fff;
+  border-radius: var(--radius-sm);
+  border: 1rpx dashed #ddd;
+}
+.admin-entry-icon { font-size: 26rpx; }
+.admin-entry-text { font-size: 24rpx; color: #bbb; font-weight: 600; }
+
+.footer-text { text-align: center; padding: 40rpx; color: var(--text-light); font-size: 24rpx; }

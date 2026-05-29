@@ -1,0 +1,64 @@
+<view class="page-admin">
+
+  <!-- ======== 未登录：登录页 ======== -->
+  <view class="login-wrap" wx:if="{{!isLoggedIn}}">
+    <view class="login-box">
+      <view class="login-logo">🔐</view>
+      <text class="login-title">管理员登录</text>
+      <text class="login-subtitle">蜀味火锅后台管理系统</text>
+
+      <input class="login-input" placeholder="用户名" value="{{username}}"
+        bindinput="onUsernameInput" />
+      <input class="login-input" placeholder="密码" password value="{{password}}"
+        bindinput="onPasswordInput" />
+
+      <button class="login-btn" bindtap="doLogin" disabled="{{loading}}">
+        {{loading ? '登录中...' : '登 录'}}
+      </button>
+
+      <text class="login-hint">默认账号: admin / admin123</text>
+    </view>
+  </view>
+
+  <!-- ======== 已登录：后台首页 ======== -->
+  <view class="dashboard" wx:else>
+    <!-- 顶栏 -->
+    <view class="dash-header">
+      <view class="dash-header-left">
+        <text class="dash-title">📊 管理后台</text>
+        <text class="dash-admin">👤 {{adminInfo ? adminInfo.nickname || adminInfo.username : ''}}</text>
+      </view>
+      <button class="logout-btn" bindtap="logout">退出</button>
+    </view>
+
+    <!-- 快捷入口 -->
+    <view class="quick-grid">
+      <view class="quick-card quick-card-highlight" bindtap="goMenuManage">
+        <text class="quick-icon">📋</text>
+        <text class="quick-label">菜品管理</text>
+        <text class="quick-desc">新增 / 修改 / 上下架</text>
+      </view>
+      <view class="quick-card">
+        <text class="quick-icon">📦</text>
+        <text class="quick-label">{{stats.totalItems}}</text>
+        <text class="quick-desc">全部菜品</text>
+      </view>
+      <view class="quick-card">
+        <text class="quick-icon">✅</text>
+        <text class="quick-label">{{stats.activeItems}}</text>
+        <text class="quick-desc">在售中</text>
+      </view>
+    </view>
+
+    <!-- 提示 -->
+    <view class="dash-tip">
+      <text class="tip-title">💡 操作提示</text>
+      <text class="tip-item">· 点击"菜品管理"可查看、新增、修改菜品</text>
+      <text class="tip-item">· 新增菜品时需填写名称、分类、价格</text>
+      <text class="tip-item">· 可对菜品进行上架/下架操作</text>
+      <text class="tip-item">· 确保后端服务 (localhost:3001) 已启动</text>
+    </view>
+
+  </view>
+
+</view>

@@ -1,0 +1,90 @@
+<view class="page-menu-list">
+
+  <!-- 顶栏 -->
+  <view class="ml-header">
+    <text class="ml-title">📋 菜品管理</text>
+    <button class="ml-add-btn" bindtap="goAdd">＋ 新增菜品</button>
+  </view>
+
+  <!-- 搜索栏 -->
+  <view class="ml-search">
+    <input class="ml-search-input" placeholder="🔍 搜索菜品名称..."
+      value="{{searchKeyword}}" bindinput="onSearchInput" confirm-type="search" />
+  </view>
+
+  <!-- 分类筛选Tab -->
+  <scroll-view class="ml-cat-scroll" scroll-x enable-flex>
+    <view class="ml-cat-item {{filterCatId === 0 ? 'active' : ''}}"
+      data-id="0" bindtap="onFilterCategory">全部</view>
+    <view class="ml-cat-item {{filterCatId === item.id ? 'active' : ''}}"
+      wx:for="{{categories}}" wx:key="id"
+      data-id="{{item.id}}" bindtap="onFilterCategory">
+      {{item.icon}} {{item.name}}
+    </view>
+  </scroll-view>
+
+  <!-- 状态筛选 -->
+  <view class="ml-status-row">
+    <view class="ml-status-item {{filterStatus === -1 ? 'active' : ''}}"
+      data-status="-1" bindtap="onFilterStatus">全部</view>
+    <view class="ml-status-item ml-status-on {{filterStatus === 1 ? 'active' : ''}}"
+      data-status="1" bindtap="onFilterStatus">上架中</view>
+    <view class="ml-status-item ml-status-off {{filterStatus === 0 ? 'active' : ''}}"
+      data-status="0" bindtap="onFilterStatus">已下架</view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="ml-loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="ml-empty" wx:if="{{!loading && filteredItems.length === 0}}">
+    <text class="ml-empty-icon">📭</text>
+    <text class="ml-empty-text">暂无菜品数据</text>
+    <text class="ml-empty-hint">点击上方"新增菜品"添加</text>
+  </view>
+
+  <!-- 菜品列表 -->
+  <scroll-view class="ml-scroll" scroll-y wx:if="{{!loading && filteredItems.length > 0}}">
+    <view class="ml-item" wx:for="{{filteredItems}}" wx:key="id">
+      <!-- 左侧：图标和基本信息 -->
+      <view class="ml-item-left">
+        <image wx:if="{{item.image_url}}" class="ml-item-img" src="{{item.image_url}}" mode="aspectFill" />
+        <text class="ml-item-icon" wx:else>{{item.image || '🍽'}}</text>
+        <view class="ml-item-info">
+          <view class="ml-item-name-row">
+            <text class="ml-item-name">{{item.name}}</text>
+            <text class="ml-item-badge {{item.status === 1 ? 'badge-on' : 'badge-off'}}">
+              {{item.status === 1 ? '上架' : '下架'}}
+            </text>
+          </view>
+          <text class="ml-item-cat">{{item.categoryName || getCatName(item.cat_id)}}</text>
+          <text class="ml-item-desc">{{item.description || '暂无描述'}}</text>
+          <view class="ml-item-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+            <text class="ml-tag" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+          </view>
+        </view>
+      </view>
+      <!-- 右侧：价格和操作 -->
+      <view class="ml-item-right">
+        <text wx:if="{{item.discount_price}}" class="ml-item-price-old">¥{{item.price}}</text>
+        <text class="ml-item-price {{item.discount_price ? 'discount' : ''}}">¥{{item.discount_price || item.price}}</text>
+        <text class="ml-item-unit">/{{item.unit}}</text>
+        <text class="ml-item-sales">已售 {{item.sales}}</text>
+      </view>
+      <!-- 操作按钮 -->
+      <view class="ml-item-actions">
+        <button class="ml-action-btn action-edit" data-id="{{item.id}}" bindtap="goEdit">✏️ 编辑</button>
+        <button class="ml-action-btn action-status"
+          data-id="{{item.id}}" data-status="{{item.status}}" bindtap="toggleStatus">
+          {{item.status === 1 ? '⬇️ 下架' : '⬆️ 上架'}}
+        </button>
+        <button class="ml-action-btn action-del"
+          data-id="{{item.id}}" bindtap="deleteItem">🗑 删除</button>
+      </view>
+    </view>
+    <view style="height: 40rpx;"></view>
+  </scroll-view>
+
+</view>

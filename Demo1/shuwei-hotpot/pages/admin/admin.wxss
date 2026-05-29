@@ -1,0 +1,118 @@
+.page-admin { min-height: 100vh; background: var(--bg); }
+
+/* ======== 登录页面 ======== */
+.login-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+.login-box {
+  width: 100%;
+  max-width: 560rpx;
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 60rpx 40rpx;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.login-logo { font-size: 80rpx; margin-bottom: 16rpx; }
+.login-title { font-size: 36rpx; font-weight: 800; display: block; }
+.login-subtitle { font-size: 24rpx; color: var(--text-light); display: block; margin: 8rpx 0 40rpx; }
+
+.login-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}
+
+.login-btn {
+  width: 100%;
+  height: 80rpx;
+  background: linear-gradient(135deg, #d4380d, #c02d08);
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  border: none;
+  line-height: 80rpx;
+  margin-top: 10rpx;
+}
+.login-btn[disabled] { opacity: 0.6; }
+
+.login-hint {
+  font-size: 22rpx;
+  color: var(--text-light);
+  display: block;
+  margin-top: 24rpx;
+}
+
+/* ======== 后台首页 ======== */
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 28rpx;
+  background: #fff;
+  border-bottom: 1rpx solid var(--border);
+}
+.dash-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.dash-title { font-size: 34rpx; font-weight: 800; }
+.dash-admin { font-size: 26rpx; color: var(--text-secondary); }
+.logout-btn {
+  padding: 12rpx 28rpx;
+  background: #f5f5f5;
+  color: #999;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  border: none;
+  line-height: 1.5;
+}
+
+/* 快捷入口网格 */
+.quick-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20rpx 20rpx 0;
+  gap: 16rpx;
+}
+.quick-card {
+  flex: 1;
+  min-width: calc(50% - 16rpx);
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 30rpx 24rpx;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.quick-card-highlight {
+  min-width: calc(100%);
+  background: linear-gradient(135deg, #fff8f4, #fff);
+  border: 2rpx solid var(--border);
+}
+.quick-icon { font-size: 48rpx; display: block; margin-bottom: 8rpx; }
+.quick-label { font-size: 36rpx; font-weight: 800; color: var(--text); display: block; }
+.quick-desc { font-size: 22rpx; color: var(--text-light); margin-top: 4rpx; display: block; }
+
+/* 提示 */
+.dash-tip {
+  margin: 24rpx 24rpx;
+  padding: 24rpx;
+  background: #fffbe6;
+  border-radius: var(--radius-sm);
+  border: 1rpx solid #f0e0b0;
+}
+.tip-title { font-size: 28rpx; font-weight: 700; color: #8b7a40; display: block; margin-bottom: 12rpx; }
+.tip-item { font-size: 24rpx; color: #7a6b38; display: block; line-height: 1.8; }

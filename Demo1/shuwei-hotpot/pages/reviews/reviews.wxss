@@ -1,0 +1,217 @@
+/* ============================================================
+   顾客评价展示页
+   ============================================================ */
+
+.page-reviews {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* -------- 顶部标题 -------- */
+.rv-header {
+  padding: 24rpx 28rpx 16rpx;
+  background: #fff;
+  border-bottom: 1rpx solid var(--border);
+}
+.rv-title {
+  font-size: 36rpx;
+  font-weight: 800;
+  display: block;
+}
+.rv-subtitle {
+  font-size: 24rpx;
+  color: var(--text-light);
+  margin-top: 4rpx;
+}
+
+/* -------- 评价统计卡片 -------- */
+.rv-stats-card {
+  display: flex;
+  margin: 16rpx 20rpx;
+  padding: 24rpx;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  gap: 24rpx;
+}
+.stats-left {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 160rpx;
+}
+.stats-rating-num {
+  font-size: 56rpx;
+  font-weight: 800;
+  color: #e8a850;
+  line-height: 1;
+}
+.stats-stars {
+  font-size: 22rpx;
+  margin: 6rpx 0;
+  letter-spacing: 2rpx;
+}
+.stats-total {
+  font-size: 22rpx;
+  color: var(--text-light);
+}
+.stats-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  justify-content: center;
+}
+.stat-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.stat-bar-label {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+  min-width: 40rpx;
+  text-align: right;
+}
+.stat-bar-track {
+  flex: 1;
+  height: 14rpx;
+  background: #f0f0f0;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.stat-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e8a850, #f0c040);
+  border-radius: 10rpx;
+  transition: width 0.3s;
+}
+.stat-bar-count {
+  font-size: 20rpx;
+  color: var(--text-light);
+  min-width: 24rpx;
+  text-align: center;
+}
+
+/* -------- 空状态 -------- */
+.rv-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx;
+}
+.rv-empty-icon { font-size: 100rpx; margin-bottom: 20rpx; }
+.rv-empty-text { font-size: 30rpx; font-weight: 700; color: var(--text-secondary); }
+.rv-empty-hint { font-size: 24rpx; color: var(--text-light); margin-top: 8rpx; }
+
+/* -------- 评价列表 -------- */
+.rv-list {
+  flex: 1;
+  padding: 0 20rpx;
+}
+
+/* 评价卡片 */
+.rv-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 24rpx;
+  margin-top: 16rpx;
+  box-shadow: var(--shadow);
+}
+
+/* 评价头部 */
+.rv-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+.rv-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.rv-stars {
+  font-size: 26rpx;
+  letter-spacing: 2rpx;
+}
+.rv-rating-text {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #e8a850;
+}
+.rv-table {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  background: #f8f8f8;
+  padding: 4rpx 14rpx;
+  border-radius: 16rpx;
+}
+
+/* 评价时间 */
+.rv-time {
+  font-size: 22rpx;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+/* 评价内容 */
+.rv-comment {
+  font-size: 28rpx;
+  color: var(--text);
+  line-height: 1.6;
+  display: block;
+  margin-bottom: 14rpx;
+  padding: 14rpx 18rpx;
+  background: #fdf6f0;
+  border-radius: var(--radius-sm);
+}
+.rv-comment-empty {
+  color: var(--text-light);
+  font-style: italic;
+  background: #f8f8f8;
+}
+
+/* 评价图片缩略图 */
+.rv-images { display: flex; gap: 10rpx; margin-bottom: 14rpx; flex-wrap: wrap; }
+.rv-thumb { width: 120rpx; height: 120rpx; border-radius: var(--radius-sm); }
+
+/* 菜品信息 */
+.rv-items {
+  margin-bottom: 12rpx;
+}
+.rv-items-label {
+  font-size: 22rpx;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: 6rpx;
+}
+.rv-items-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6rpx;
+}
+.rv-tag {
+  font-size: 22rpx;
+  background: #fff0ed;
+  color: var(--primary);
+  padding: 4rpx 14rpx;
+  border-radius: 16rpx;
+  font-weight: 600;
+}
+
+/* 金额 */
+.rv-price {
+  font-size: 26rpx;
+  font-weight: 700;
+  color: var(--primary);
+  display: block;
+  text-align: right;
+}

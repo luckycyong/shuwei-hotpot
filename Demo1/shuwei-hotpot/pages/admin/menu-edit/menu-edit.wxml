@@ -1,0 +1,120 @@
+<view class="page-menu-edit">
+
+  <!-- 表单 -->
+  <view class="form-wrap">
+
+    <!-- 基本信息 -->
+    <view class="form-section">
+      <text class="form-section-title">📌 基本信息</text>
+
+      <view class="form-field">
+        <text class="form-label">菜品名称 *</text>
+        <input class="form-input" placeholder="例如：雪花肥牛" value="{{name}}" bindinput="onNameInput" />
+      </view>
+
+      <view class="form-field">
+        <text class="form-label">所属分类 *</text>
+        <picker class="form-picker" value="{{catIndex}}"
+          range="{{categories}}" range-key="name" bindchange="onCatChange">
+          <view class="picker-view">
+            <text wx:if="{{categories.length > 0}}">{{categories[catIndex].icon}} {{categories[catIndex].name}}</text>
+            <text wx:else class="picker-placeholder">请选择分类</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-row">
+        <view class="form-field form-field-half">
+          <text class="form-label">价格（元）*</text>
+          <input class="form-input" placeholder="例如：68" value="{{price}}" bindinput="onPriceInput" type="digit" />
+        </view>
+        <view class="form-field form-field-half">
+          <text class="form-label">折扣价（选填）</text>
+          <input class="form-input" placeholder="留空=无折扣" value="{{discountPrice}}" bindinput="onDiscountInput" type="digit" />
+        </view>
+      </view>
+
+      <view class="form-row">
+        <view class="form-field form-field-half">
+          <text class="form-label">单位</text>
+          <input class="form-input" placeholder="份" value="{{unit}}" bindinput="onUnitInput" />
+        </view>
+      </view>
+
+      <view class="form-field">
+        <text class="form-label">菜品描述</text>
+        <textarea class="form-textarea" placeholder="例如：澳洲谷饲肥牛，大理石花纹"
+          value="{{description}}" bindinput="onDescInput" maxlength="255" />
+      </view>
+    </view>
+
+    <!-- 展示信息 -->
+    <view class="form-section">
+      <text class="form-section-title">🎨 展示信息</text>
+
+      <view class="form-field">
+        <text class="form-label">菜品图标（emoji）</text>
+        <input class="form-input" placeholder="🍽" value="{{image}}" bindinput="onImageInput" />
+        <view class="emoji-grid">
+          <text class="emoji-item {{image === item ? 'active' : ''}}"
+            wx:for="{{emojiList}}" wx:key="*this"
+            data-emoji="{{item}}" bindtap="selectEmoji">{{item}}</text>
+        </view>
+      </view>
+
+      <view class="form-field">
+        <text class="form-label">菜品图片</text>
+        <view class="img-upload-row">
+          <input class="form-input form-input-flex" placeholder="输入图片URL" value="{{imageUrl}}" bindinput="onImageUrlInput" />
+          <view class="upload-btn" bindtap="pickImage">选择</view>
+        </view>
+        <!-- 预览：优先显示本地已选的图片，否则显示已有的URL -->
+        <image class="img-preview" wx:if="{{localImagePath}}" src="{{localImagePath}}" mode="aspectFill" />
+        <image class="img-preview" wx:elif="{{imageUrl}}" src="{{imageUrl}}" mode="aspectFill" />
+        <text class="img-tip">点击"选择"从手机相册选取图片，保存时自动上传；或直接输入图片URL</text>
+      </view>
+
+      <view class="form-field">
+        <text class="form-label">辣度（0-5）</text>
+        <view class="spicy-row">
+          <text class="spicy-option {{spicy === item.value ? 'active' : ''}}"
+            wx:for="{{spicyOptions}}" wx:key="value"
+            data-value="{{item.value}}" bindtap="onSpicyInput">{{item.label}}</text>
+        </view>
+      </view>
+
+      <view class="form-field">
+        <text class="form-label">标签（逗号分隔）</text>
+        <input class="form-input" placeholder="例如：招牌,麻辣,爆款" value="{{tags}}" bindinput="onTagsInput" />
+      </view>
+    </view>
+
+    <!-- 状态 -->
+    <view class="form-section">
+      <text class="form-section-title">⚙️ 状态</text>
+
+      <view class="form-field">
+        <text class="form-label">上架状态</text>
+        <picker class="form-picker" value="{{status === 1 ? 0 : 1}}" range="{{['上架', '下架']}}"
+          bindchange="onStatusChange">
+          <view class="picker-view">
+            <text>{{status === 1 ? '✅ 上架' : '⛔ 下架'}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 提交按钮（使用 view 避免 button 默认行为） -->
+    <view class="form-submit">
+      <view class="submit-btn {{isSubmitting ? 'disabled' : ''}}" bindtap="submitForm">
+        {{isSubmitting ? '提交中...' : (mode === 'add' ? '确认新增' : '保存修改')}}
+      </view>
+      <view class="form-submit-row">
+        <view class="cancel-btn" bindtap="goBack">← 返回列表</view>
+        <text class="form-hint">{{mode === 'add' ? '新增后自动清空，可继续添加' : '保存后不跳转，可继续修改'}}</text>
+      </view>
+    </view>
+
+  </view>
+
+</view>

@@ -1,88 +1,131 @@
 <view class="page-index">
-        <!-- 顶部信息栏 -->
-        <view class="top-bar">
-        <view class="shop-info">
-        <text class="shop-name">🍲 蜀味火锅</text>
-        <text class="table-badge" bindtap="showTableModal">
-        桌号: {{tableNo || '点击设置'}} 📍
-        </text>
-        </view>
-        <view class="cart-entry" bindtap="goToCart">
-        <text class="cart-icon">🛒</text>
-        <text class="cart-count" wx:if="{{cartCount > 0}}">{{cartCount}}</text>
-        </view>
-        </view>
+  <!-- 顶部信息栏 -->
+  <view class="top-bar">
+    <view class="shop-info">
+      <text class="shop-name">🍲 蜀味火锅</text>
+      <text class="table-badge {{isGuest ? 'guest' : ''}}" bindtap="openTableModal">
+        {{isGuest ? '👤 游客浏览' : '桌号: ' + tableNo}} 📍
+      </text>
+    </view>
+    <view class="cart-entry" bindtap="goToCart">
+      <text class="cart-icon">🛒</text>
+      <text class="cart-count" wx:if="{{cartCount > 0}}">{{cartCount}}</text>
+    </view>
+  </view>
 
-        <!-- 搜索栏 -->
-        <view class="search-bar">
-        <input class="search-input" placeholder="🔍 搜索菜品..." value="{{searchKeyword}}"
-        bindinput="onSearchInput" confirm-type="search" />
-        </view>
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input class="search-input" placeholder="🔍 搜索菜品..." value="{{searchKeyword}}"
+      bindinput="onSearchInput" confirm-type="search" />
+  </view>
 
-        <!-- 分类标签 -->
-        <scroll-view class="category-scroll" scroll-x enable-flex>
-        <view class="cat-item {{activeCatId === item.id ? 'active' : ''}}"
-        wx:for="{{categories}}" wx:key="id"
-        data-catid="{{item.id}}" bindtap="switchCategory">
-        <text>{{item.icon}} {{item.name}}</text>
-        </view>
-        </scroll-view>
+  <!-- 分类标签（仅在加载完成后显示） -->
+  <view wx:if="{{loading && categories.length === 0}}" class="cat-loading">
+    <text class="cat-loading-text">⏳ 加载分类...</text>
+  </view>
+  <scroll-view class="category-scroll" scroll-x enable-flex wx:else>
+    <view class="cat-item {{activeCatId === item.id ? 'active' : ''}}"
+      wx:for="{{categories}}" wx:key="id"
+      data-catid="{{item.id}}" bindtap="switchCategory">
+      <text>{{item.icon}} {{item.name}}</text>
+    </view>
+  </scroll-view>
 
-        <!-- 菜品列表 -->
-        <scroll-view class="menu-scroll" scroll-y enhanced show-scrollbar="{{false}}">
-        <view class="menu-grid">
+  <!-- 菜品列表（支持下拉刷新） -->
+  <scroll-view class="menu-scroll" scroll-y enhanced show-scrollbar="{{false}}"
+    refresher-enabled refresher-triggered="{{refreshing}}" bindrefresherrefresh="onRefresh">
+
+    <!-- 加载中 -->
+    <view class="loading-tip" wx:if="{{loading}}">
+      <text>⏳ 加载菜单中...</text>
+    </view>
+
+    <!-- 加载失败 -->
+    <view class="loading-tip" wx:elif="{{loadError}}">
+      <text>❌ 加载失败，请确认后端服务已启动</text>
+      <text class="retry-btn" bindtap="loadMenuData">点击重试</text>
+    </view>
+
+    <!-- 菜品网格 -->
+    <view wx:else>
+      <view class="menu-grid">
         <view class="menu-card" wx:for="{{filteredItems}}" wx:key="id"
-        data-item="{{item}}" bindtap="addToCart">
-        <view class="card-image">{{item.image}}</view>
-        <view class="card-info">
-        <view class="card-name">
-        {{item.name}}
-        <text class="spicy-icon" wx:if="{{item.spicy > 0}}">
-        {'🌶️'.repeat(item.spicy)}
-        </text>
+          data-item="{{item}}" bindtap="addToCart">
+          <view class="card-image">
+            <image wx:if="{{item.imageUrl}}" src="{{item.imageUrl}}" mode="aspectFill" class="card-real-img" />
+            <text wx:else>{{item.image}}</text>
+          </view>
+          <view class="card-info">
+            <view class="card-name">
+              {{item.name}}
+              <text class="spicy-icon" wx:if="{{item.spicy > 0}}">{{item.spicyText}}</text>
+            </view>
+            <view class="card-desc">{{item.desc}}</view>
+            <view class="card-bottom">
+              <view class="card-price">
+                <view wx:if="{{item.hasDiscount}}" class="price-discount-row">
+                  <text class="price-old">¥{{item.price}}</text>
+                  <text class="price-effective">¥{{item.effectivePrice}}</text>
+                </view>
+                <view wx:else>
+                  <text class="unit">¥</text>
+                  <text class="num">{{item.price}}</text>
+                </view>
+                <text class="per">/{{item.unit}}</text>
+              </view>
+              <view class="add-btn">＋</view>
+            </view>
+            <view class="card-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+              <text class="tag" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+            </view>
+          </view>
         </view>
-        <view class="card-desc">{{item.desc}}</view>
-        <view class="card-bottom">
-        <text class="card-price">
-        <text class="unit">¥</text>
-        <text class="num">{{item.price}}</text>
-        <text class="per">/{{item.unit}}</text>
-        </text>
-        <view class="add-btn">＋</view>
-        </view>
-        <view class="card-tags" wx:if="{{item.tags.length > 0}}">
-        <text class="tag" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
-        </view>
-        </view>
-        </view>
-        </view>
-        <view class="empty-tip" wx:if="{{filteredItems.length === 0}}">
+      </view>
+      <view class="empty-tip" wx:if="{{filteredItems.length === 0}}">
         <text>😋 该分类暂无菜品</text>
-        </view>
-        <view style="height: 40rpx;"></view>
-        </scroll-view>
+      </view>
+      <view style="height: 40rpx;"></view>
+    </view>
 
-        <!-- 底部购物车悬浮条 -->
-        <view class="cart-float" wx:if="{{cartCount > 0}}" bindtap="goToCart">
-        <view class="cart-float-left">
-        <text class="cart-float-icon">🛒</text>
-        <text class="cart-float-count">{{cartCount}} 件商品</text>
-        </view>
-        <view class="cart-float-right">
-        <text>去结算 ›</text>
-        </view>
-        </view>
+  </scroll-view>
 
-        <!-- 桌号输入弹窗 -->
-        <view class="modal-mask" wx:if="{{showTableModal}}">
-        <view class="modal-box">
-        <text class="modal-title">🪑 请输入桌号</text>
-        <input class="modal-input" placeholder="例如: A12" value="{{tableInput}}"
+  <!-- 底部购物车悬浮条 -->
+  <view class="cart-float" wx:if="{{cartCount > 0}}" bindtap="goToCart">
+    <view class="cart-float-left">
+      <text class="cart-float-icon">🛒</text>
+      <text class="cart-float-count">{{cartCount}} 件商品</text>
+    </view>
+    <view class="cart-float-right">
+      <text>去结算 ›</text>
+    </view>
+  </view>
+
+  <!-- 桌号/游客选择弹窗 -->
+  <view class="modal-mask" wx:if="{{showTableModal}}">
+    <view class="modal-box">
+      <text class="modal-title">🪑 欢迎光临蜀味火锅</text>
+      <text class="modal-desc">输入桌号可享受完整点餐体验，或先逛逛看看</text>
+
+      <!-- 桌号输入 -->
+      <input class="modal-input" placeholder="例如: A12" value="{{tableInput}}"
         bindinput="onTableInput" focus />
-        <view class="modal-btns">
-        <button class="btn-cancel" bindtap="hideTableModal">稍后再说</button>
+      <view class="modal-btns">
+        <button class="btn-cancel" bindtap="hideTableModal">稍后绑定</button>
         <button class="btn-confirm" bindtap="confirmTable">确认绑定</button>
-        </view>
-        </view>
-        </view>
-        </view>
+      </view>
+
+      <!-- 分割线 -->
+      <view class="modal-divider">
+        <text class="divider-line"></text>
+        <text class="divider-text">或</text>
+        <text class="divider-line"></text>
+      </view>
+
+      <!-- 游客模式 -->
+      <button class="btn-guest" bindtap="enterGuestMode">
+        👤 忽略，先逛逛
+      </button>
+      <text class="guest-hint">游客模式可浏览菜品和顾客评价，下单需绑定桌号</text>
+    </view>
+  </view>
+</view>

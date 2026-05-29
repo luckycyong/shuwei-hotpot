@@ -1,0 +1,82 @@
+<view class="page-reviews">
+
+  <view class="rv-header">
+    <text class="rv-title">📝 顾客评价</text>
+    <text class="rv-subtitle">看看大家怎么说</text>
+  </view>
+
+  <view class="rv-stats-card" wx:if="{{!isEmpty}}">
+    <view class="stats-left">
+      <text class="stats-rating-num">{{stats.averageRating.toFixed(1)}}</text>
+      <text class="stats-stars">
+        <text wx:for="{{[1,2,3,4,5]}}" wx:key="*this">
+          {{item <= Math.round(stats.averageRating) ? '⭐' : '☆'}}
+        </text>
+      </text>
+      <text class="stats-total">{{stats.total}} 条评价</text>
+    </view>
+    <view class="stats-right">
+      <view class="stat-bar-row" wx:for="{{[5,4,3,2,1]}}" wx:key="*this">
+        <text class="stat-bar-label">{{item}}星</text>
+        <view class="stat-bar-track">
+          <view class="stat-bar-fill" style="width: {{stats.total > 0 ? (stats.ratingCounts[item-1] / stats.total * 100) : 0}}%"></view>
+        </view>
+        <text class="stat-bar-count">{{stats.ratingCounts[item-1]}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="rv-empty" wx:if="{{loading}}">
+    <text class="rv-empty-icon">⏳</text>
+    <text class="rv-empty-text">加载评价中...</text>
+  </view>
+
+  <view class="rv-empty" wx:elif="{{isEmpty && !loading}}">
+    <text class="rv-empty-icon">📝</text>
+    <text class="rv-empty-text">暂无顾客评价</text>
+    <text class="rv-empty-hint">下单用餐后可以发表您的用餐体验</text>
+  </view>
+
+  <scroll-view class="rv-list" scroll-y wx:elif="{{!isEmpty}}">
+    <view class="rv-card" wx:for="{{reviews}}" wx:key="orderId"
+      data-review="{{item}}" bindtap="showReviewDetail">
+      <view class="rv-card-top">
+        <view class="rv-rating-row">
+          <text class="rv-stars">
+            <text wx:for="{{[1,2,3,4,5]}}" wx:key="*this">
+              {{item <= rating ? '⭐' : '☆'}}
+            </text>
+          </text>
+          <text class="rv-rating-text">
+            {{rating === 1 ? '很差' : rating === 2 ? '一般' : rating === 3 ? '不错' : rating === 4 ? '满意' : '超赞！'}}
+          </text>
+        </view>
+        <text class="rv-table">🪑 {{tableNo}}</text>
+      </view>
+
+      <text class="rv-time" wx:if="{{reviewTime}}">🕐 {{reviewTime}}</text>
+
+      <!-- 评价文字（20字截断） -->
+      <text class="rv-comment" wx:if="{{comment}}">{{commentShort || comment}}</text>
+      <text class="rv-comment rv-comment-empty" wx:else>（未填写文字评价）</text>
+
+      <!-- 评价图片缩略图 -->
+      <view class="rv-images" wx:if="{{images && images.length > 0}}">
+        <image class="rv-thumb" wx:for="{{images}}" wx:key="*this" src="{{item}}" mode="aspectFill" />
+      </view>
+
+      <view class="rv-items" wx:if="{{items.length > 0}}">
+        <text class="rv-items-label">🍽 下单菜品：</text>
+        <view class="rv-items-tags">
+          <text class="rv-tag" wx:for="{{items}}" wx:for-item="it" wx:key="id">
+            {{it.name}}×{{it.quantity}}
+          </text>
+        </view>
+      </view>
+
+      <text class="rv-price">合计 ¥{{totalPriceStr}}</text>
+    </view>
+    <view style="height: 40rpx;"></view>
+  </scroll-view>
+
+</view>
